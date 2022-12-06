@@ -1,7 +1,10 @@
 pipeline{
 
     agent any
-
+    
+    environemnt{
+        Build_id = "${env.BUILD_ID}"
+    }
     stages{
 
         stage("Git checkout"){
@@ -67,6 +70,22 @@ pipeline{
                     protocol: 'http', 
                     repository: NexusRepo, 
                     version: "${PomVersion.version}"
+                }
+            }
+        }
+        stage("Docker image build and push to nexus"){
+            steps{
+                script{
+                   
+                    withCredentials([string(credentialsId: 'nexus_creds', variable: 'nexus_creds')]) {
+
+                    sh '''
+                    docker build -t 44.199.210.191:8083/TERASOLUNA:${Build_id} .
+                    docker login -u admin -p $nexus_creds 44.199.210.191:8083
+                    docker push 44.199.210.191:8083/TERASOLUNA:${Build_id}
+                    docker rmi 44.199.210.191:8083/TERASOLUNA:${Build_id}
+                    '''
+                    }
                 }
             }
         }
