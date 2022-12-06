@@ -17,11 +17,11 @@ pipeline{
                 sh 'mvn test'
             }
         }
-      //  stage("Integration test"){
-      //      steps{
-    //            sh 'mvn verify -DskipUnitTest'
-  //         }
-   //     }
+        stage("Integration test"){
+            steps{
+                sh 'mvn verify -DskipUnitTest'
+            }
+        }
         stage("Maven build"){
             steps{
                 sh 'mvn clean install'
@@ -62,7 +62,7 @@ pipeline{
                     ], 
                     credentialsId: 'nexus', 
                     groupId: 'com.example', 
-                    nexusUrl: '34.205.15.205:8081', 
+                    nexusUrl: '44.199.210.191:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: NexusRepo, 
