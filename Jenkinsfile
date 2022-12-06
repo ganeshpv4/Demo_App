@@ -3,7 +3,7 @@ pipeline{
     agent any
     
     environment{
-        Build_id = "${env.BUILD_ID}"
+        NUMBER = "${env.BUILD_ID}"
     }
     stages{
 
@@ -80,10 +80,10 @@ pipeline{
                     withCredentials([string(credentialsId: 'nexus_creds', variable: 'nexus_creds')]) {
 
                     sh '''
-                    docker build -t 44.199.210.191:8083/terasoluna:${Build_id} .
-                    docker login -u admin -p $nexus_creds 44.199.210.191:8083
-                    docker push 44.199.210.191:8083/terasoluna:${Build_id}
-                    docker rmi 44.199.210.191:8083/terasoluna:${Build_id}
+                     docker build -t 44.199.210.191:8083/terasoluna:${NUMBER} .
+                     docker login -u admin -p $nexus_creds 44.199.210.191:8083
+                     docker push 44.199.210.191:8083/terasoluna:${NUMBER}
+                     docker rmi 44.199.210.191:8083/terasoluna:${NUMBER}
                     '''
                     }
                 }
