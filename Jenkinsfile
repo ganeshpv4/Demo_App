@@ -2,7 +2,7 @@ pipeline{
 
     agent any
     
-    environemnt{
+    environment{
         Build_id = "${env.BUILD_ID}"
     }
     stages{
