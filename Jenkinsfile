@@ -77,11 +77,11 @@ pipeline{
             steps{
                 script{
                    
-                    withCredentials([string(credentialsId: 'nexus_creds', variable: 'nexus_creds')]) {
+                    withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_cred')]) {
 
                     sh '''
-                     docker build -t 44.199.210.191:8083/terasoluna:${NUMBER} .
-                     docker login -u admin -p $nexus_creds 44.199.210.191:8083
+                     docker build -t "44.199.210.191:8083/terasoluna:${NUMBER}" .
+                     docker login -u admin -p $nexus_cred 44.199.210.191:8083
                      docker push 44.199.210.191:8083/terasoluna:${NUMBER}
                      docker rmi 44.199.210.191:8083/terasoluna:${NUMBER}
                     '''
