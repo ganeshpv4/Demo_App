@@ -9,7 +9,7 @@ pipeline{
             steps{
                 checkout([$class: 'GitSCM', 
                         branches: [[name: '*/main']],  
-                        userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/ganeshpv7/Real-time-project.git']]])
+                        userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/ganeshpv7/Demo_App.git']]])
             }
         }
         stage("UNIT Testing"){
